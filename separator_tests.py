@@ -16,7 +16,7 @@ class Test_seperator(unittest.TestCase):
         argv[1] = 6 # Simulates passing 6 on the command line
         sys.stdout = student_output = io.StringIO()        
         sys.stdin = io.StringIO("1 2 1.2 2.3\n3\n4\n7.8 garbage, 12\n")
-        expected_out = "Integers: 1 2 3 4 \nFloats: 1.2 2.3 7.8"
+        expected_out = "Integers: 1 2 3 4\nFloats: 1.2 2.3 7.8"
         main()
         self.assertEqual(expected_out, student_output.getvalue().strip())
 
@@ -24,7 +24,21 @@ class Test_seperator(unittest.TestCase):
         argv[1] = 4 # Simulates passing 4 on the command line
         sys.stdout = student_output = io.StringIO()        
         sys.stdin = io.StringIO("1 2 3\n4 5 6\n")
-        expected_out = "Integers: 1 2 3 4 \nFloats:"
+        expected_out = "Integers: 1 2 3 4\nFloats:"
+        main()
+        self.assertEqual(expected_out, student_output.getvalue().strip())
+    def test_03(self):
+        argv[1] = 7# Simulates passing 4 on the command line
+        sys.stdout = student_output = io.StringIO()
+        sys.stdin = io.StringIO("1 2 3\n\n 5 6\n")
+        expected_out = "Integers: 1 2 3\nFloats:"
+        main()
+        self.assertEqual(expected_out, student_output.getvalue().strip())
+    def test_04(self):
+        argv[1] = 4 # Simulates passing 4 on the command line
+        sys.stdout = student_output = io.StringIO()
+        sys.stdin = io.StringIO("1.3 2.5 3.4\n4.4 5.6 6.7\n")
+        expected_out = "Integers: \nFloats: 1.3 2.5 3.4 4.4"
         main()
         self.assertEqual(expected_out, student_output.getvalue().strip())
 
